@@ -31,5 +31,3 @@ jobs:
                 git add -A
                 git commit -m "Update .csproj Version Numbers"
                 git push origin
-        
-# HEAD:github-actions

@@ -9,7 +9,10 @@ using System.Runtime.CompilerServices;
 
 namespace radj307.ObservableImmutableList
 {
-#   pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+    /// <summary>
+    /// Represents a strongly typed list of objects that can be accessed by index. Provides thread-safe methods to search, sort, and manipulate lists.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the list.</typeparam>
     public class ObservableImmutableList<T> : ObservableCollectionObject, IList, ICollection, IEnumerable, IList<T>, IImmutableList<T>, ICollection<T>, IEnumerable<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, INotifyCollectionChanged, INotifyPropertyChanged
     {
         #region Private
@@ -17,18 +20,25 @@ namespace radj307.ObservableImmutableList
         #endregion Private
 
         #region Constructors
-        public ObservableImmutableList() : this(Array.Empty<T>(), LockTypeEnum.SpinWait)
-        {
-        }
-
-        public ObservableImmutableList(IEnumerable<T> items) : this(items, LockTypeEnum.SpinWait)
-        {
-        }
-
-        public ObservableImmutableList(LockTypeEnum lockType) : this(Array.Empty<T>(), lockType)
-        {
-        }
-
+        /// <summary>
+        /// Creates a new <see cref="ObservableImmutableList{T}"/> instance with no items.
+        /// </summary>
+        public ObservableImmutableList() : this(Array.Empty<T>(), LockTypeEnum.SpinWait) { }
+        /// <summary>
+        /// Creates a new <see cref="ObservableImmutableList{T}"/> instance with the specified <paramref name="items"/>.
+        /// </summary>
+        /// <param name="items">The elements to add to the list during initialization.</param>
+        public ObservableImmutableList(IEnumerable<T> items) : this(items, LockTypeEnum.SpinWait) { }
+        /// <summary>
+        /// Creates a new <see cref="ObservableImmutableList{T}"/> instance with no items and the specified <paramref name="lockType"/>.
+        /// </summary>
+        /// <param name="lockType">The type of thread locking to use.</param>
+        public ObservableImmutableList(LockTypeEnum lockType) : this(Array.Empty<T>(), lockType) { }
+        /// <summary>
+        /// Creates a new <see cref="ObservableImmutableList{T}"/> instance with the specified <paramref name="items"/> and the specified <paramref name="lockType"/>.
+        /// </summary>
+        /// <param name="items">The elements to add to the list during initialization.</param>
+        /// <param name="lockType">The type of thread locking to use.</param>
         public ObservableImmutableList(IEnumerable<T> items, LockTypeEnum lockType) : base(lockType)
         {
             this.SyncRoot = new object();
@@ -60,7 +70,7 @@ namespace radj307.ObservableImmutableList
                     ImmutableList<T>? newItems = operation(oldList);
 
                     if (newItems == null)
-                        // user returned null which means he cancelled operation
+                        // operation returned null which means it was cancelled
                         return false;
 
                     _items = newItems;
@@ -91,7 +101,7 @@ namespace radj307.ObservableImmutableList
                     NotifyCollectionChangedEventArgs? args = kvp.Value;
 
                     if (newItems == null)
-                        // user returned null which means he cancelled operation
+                        // operation returned null which means it was cancelled
                         return false;
 
                     _items = newItems;
@@ -121,7 +131,7 @@ namespace radj307.ObservableImmutableList
                 ImmutableList<T>? newItems = operation(_items);
 
                 if (newItems == null)
-                    // user returned null which means he cancelled operation
+                    // operation returned null which means it was cancelled
                     return false;
 
                 result = (_items = newItems) != oldItems;
@@ -151,7 +161,7 @@ namespace radj307.ObservableImmutableList
                 NotifyCollectionChangedEventArgs? args = kvp.Value;
 
                 if (newItems == null)
-                    // user returned null which means he cancelled operation
+                    // operation returned null which means it was cancelled
                     return false;
 
                 result = (_items = newItems) != oldItems;
@@ -173,7 +183,8 @@ namespace radj307.ObservableImmutableList
 
         #region Specific
 
-        public bool DoInsert(Func<ImmutableList<T>, KeyValuePair<int, T>> valueProvider) => this.DoOperation
+        public bool DoInsert(Func<ImmutableList<T>, KeyValuePair<int, T>> valueProvider)
+            => this.DoOperation
                 (
                 currentItems =>
                     {
@@ -183,7 +194,8 @@ namespace radj307.ObservableImmutableList
                     }
                 );
 
-        public bool DoAdd(Func<ImmutableList<T>, T> valueProvider) => this.DoOperation
+        public bool DoAdd(Func<ImmutableList<T>, T> valueProvider)
+            => this.DoOperation
                 (
                 currentItems =>
                     {
@@ -193,19 +205,22 @@ namespace radj307.ObservableImmutableList
                     }
                 );
 
-        public bool DoAddRange(Func<ImmutableList<T>, IEnumerable<T>> valueProvider) => this.DoOperation
+        public bool DoAddRange(Func<ImmutableList<T>, IEnumerable<T>> valueProvider)
+            => this.DoOperation
                 (
                 currentItems =>
                     currentItems.AddRange(valueProvider(currentItems))
                 );
 
-        public bool DoRemove(Func<ImmutableList<T>, T> valueProvider) => this.DoRemoveAt
+        public bool DoRemove(Func<ImmutableList<T>, T> valueProvider)
+            => this.DoRemoveAt
                 (
                 currentItems =>
                     currentItems.IndexOf(valueProvider(currentItems))
                 );
 
-        public bool DoRemoveAt(Func<ImmutableList<T>, int> valueProvider) => this.DoOperation
+        public bool DoRemoveAt(Func<ImmutableList<T>, int> valueProvider)
+            => this.DoOperation
                 (
                 currentItems =>
                     {
@@ -216,7 +231,8 @@ namespace radj307.ObservableImmutableList
                     }
                 );
 
-        public bool DoSetItem(Func<ImmutableList<T>, KeyValuePair<int, T>> valueProvider) => this.DoOperation
+        public bool DoSetItem(Func<ImmutableList<T>, KeyValuePair<int, T>> valueProvider)
+            => this.DoOperation
                 (
                 currentItems =>
                     {
@@ -229,7 +245,8 @@ namespace radj307.ObservableImmutableList
                     }
                 );
 
-        public bool TryInsert(Func<ImmutableList<T>, KeyValuePair<int, T>> valueProvider) => this.TryOperation
+        public bool TryInsert(Func<ImmutableList<T>, KeyValuePair<int, T>> valueProvider)
+            => this.TryOperation
                 (
                 currentItems =>
                     {
@@ -239,7 +256,8 @@ namespace radj307.ObservableImmutableList
                     }
                 );
 
-        public bool TryAdd(Func<ImmutableList<T>, T> valueProvider) => this.TryOperation
+        public bool TryAdd(Func<ImmutableList<T>, T> valueProvider)
+            => this.TryOperation
                 (
                 currentItems =>
                     {
@@ -249,19 +267,22 @@ namespace radj307.ObservableImmutableList
                     }
                 );
 
-        public bool TryAddRange(Func<ImmutableList<T>, IEnumerable<T>> valueProvider) => this.TryOperation
+        public bool TryAddRange(Func<ImmutableList<T>, IEnumerable<T>> valueProvider)
+            => this.TryOperation
                 (
                 currentItems =>
                     currentItems.AddRange(valueProvider(currentItems))
                 );
 
-        public bool TryRemove(Func<ImmutableList<T>, T> valueProvider) => this.TryRemoveAt
+        public bool TryRemove(Func<ImmutableList<T>, T> valueProvider)
+            => this.TryRemoveAt
                 (
                 currentItems =>
                     currentItems.IndexOf(valueProvider(currentItems))
                 );
 
-        public bool TryRemoveAt(Func<ImmutableList<T>, int> valueProvider) => this.TryOperation
+        public bool TryRemoveAt(Func<ImmutableList<T>, int> valueProvider)
+            => this.TryOperation
                 (
                 currentItems =>
                     {
@@ -272,7 +293,8 @@ namespace radj307.ObservableImmutableList
                     }
                 );
 
-        public bool TrySetItem(Func<ImmutableList<T>, KeyValuePair<int, T>> valueProvider) => this.TryOperation
+        public bool TrySetItem(Func<ImmutableList<T>, KeyValuePair<int, T>> valueProvider)
+            => this.TryOperation
                 (
                 currentItems =>
                     {
@@ -287,6 +309,10 @@ namespace radj307.ObservableImmutableList
 
         #endregion Specific
 
+        /// <summary>
+        /// Creates a <see cref="ImmutableList{T}"/> from a <see cref="ObservableImmutableList{T}"/>.
+        /// </summary>
+        /// <returns>A new <see cref="ImmutableList{T}"/> instance with the same items as this instance.</returns>
         public ImmutableList<T> ToImmutableList() => _items;
 
         #region IEnumerable<T>
@@ -536,5 +562,4 @@ namespace radj307.ObservableImmutableList
 
         #endregion Non Thead-Safe Methods
     }
-#   pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
