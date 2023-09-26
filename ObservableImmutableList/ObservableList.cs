@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace ObservableImmutableList
+namespace radj307.ObservableImmutableList
 {
     /// <inheritdoc cref="ObservableCollection{T}"/>
     public class ObservableList<T> : ObservableCollection<T>

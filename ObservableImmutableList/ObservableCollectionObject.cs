@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Threading;
 
-namespace ObservableImmutableList
+namespace radj307.ObservableImmutableList
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public abstract class ObservableCollectionObject : INotifyCollectionChanged, INotifyPropertyChanged
