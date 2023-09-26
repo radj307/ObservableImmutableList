@@ -1,11 +1,11 @@
 name: Upload NuGet Package
 
 on:
-  #workflow_run:
-#    workflows:
- #     - 'Update Version'
- #   types:
-#      - 'completed'
+  workflow_run:
+    workflows:
+      - 'Update Version'
+    types:
+      - 'completed'
   workflow_dispatch:
       
 defaults:

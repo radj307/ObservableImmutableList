@@ -1,5 +1,11 @@
+# SetVersion.ps1
+#   Powershell helper script for CI scripts to update .csproj files.
+#
 # Usage:
 #   SetVersion -Path <CSPROJ_PATH> [<PROPERTY>=<VALUE>]...
+#
+# Example:
+#   SetVersion -Path MyProject/MyProject.csproj  Version=$(git describe --tags --abbrev=0)
 param(
     [Parameter(Mandatory=$true,HelpMessage="Path to the target .csproj file.")][String]$Path="",
     [Parameter(ValueFromRemainingArguments=$true)][String[]]$PropertySetters
