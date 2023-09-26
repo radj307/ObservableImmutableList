@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\UpdateVersion.yaml = .github\workflows\UpdateVersion.yaml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "radj307.ObservableImmutableList", "ObservableImmutableList\radj307.ObservableImmutableList.csproj", "{83F55B88-47E0-4269-9534-C90C3EACCEB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "radj307.ObservableImmutableList", "radj307.ObservableImmutableList\radj307.ObservableImmutableList.csproj", "{01CDB3D1-4231-41C9-9FBE-9E86A40AB3CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{83F55B88-47E0-4269-9534-C90C3EACCEB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83F55B88-47E0-4269-9534-C90C3EACCEB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83F55B88-47E0-4269-9534-C90C3EACCEB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83F55B88-47E0-4269-9534-C90C3EACCEB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01CDB3D1-4231-41C9-9FBE-9E86A40AB3CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01CDB3D1-4231-41C9-9FBE-9E86A40AB3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01CDB3D1-4231-41C9-9FBE-9E86A40AB3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01CDB3D1-4231-41C9-9FBE-9E86A40AB3CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
