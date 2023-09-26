@@ -1,11 +1,11 @@
 name: Upload NuGet Package
 
 on:
-  workflow_run:
-    workflows:
-      - 'Update Version'
-    types:
-      - 'completed'
+  #workflow_run:
+#    workflows:
+ #     - 'Update Version'
+ #   types:
+#      - 'completed'
   workflow_dispatch:
       
 defaults:
@@ -16,7 +16,6 @@ defaults:
 jobs:
   build-and-publish:
     runs-on: windows-latest
-    if:      ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       DOTNET_NOLOGO:                true
       DOTNET_CLI_TELEMETRY_OPTOUT:  true
