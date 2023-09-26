@@ -22,7 +22,7 @@ jobs:
           fetch-depth:  0
 
       - name:   Update .csproj Version
-        run:    .\SetVersion.ps1 -Path ObservableImmutableList/ObservableImmutableList.csproj Version=$(git describe --tags --abbrev=0)
+        run:    .\SetVersion.ps1 -Path radj307.ObservableImmutableList/radj307.ObservableImmutableList.csproj Version=$(git describe --tags --abbrev=0)
 
       - name:   Push Changes
         run:    |
