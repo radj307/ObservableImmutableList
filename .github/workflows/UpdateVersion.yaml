@@ -31,5 +31,10 @@ jobs:
                 git add -A
                 git commit -m "Update .csproj Version Numbers"
                 git push origin
+
+      - name:   Move Tag to new Commit
+        run:    |
+                git tag -fa ${GITHUB_REF##*/}
+                git push -f --tags
         
 # HEAD:github-actions
